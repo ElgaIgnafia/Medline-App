@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'login.dart';
+import 'register.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -17,7 +19,7 @@ class LandingPage extends StatelessWidget {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.45,
               decoration: const BoxDecoration(
-                color: Color(0xFFC7A4FF), // Ungu pastel sesuai desain
+                color: Color(0xFFC7A4FF),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(55),
                   topRight: Radius.circular(55),
@@ -31,7 +33,7 @@ class LandingPage extends StatelessWidget {
             children: [
               const SizedBox(height: 70),
 
-              // IMAGE ON TOP
+              // IMAGE
               Center(
                 child: Image.asset(
                   "assets/images/medline.png",
@@ -53,7 +55,7 @@ class LandingPage extends StatelessWidget {
 
               const Spacer(),
 
-              // PURPLE INFO SECTION
+              // TEXT + BUTTONS SECTION
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Column(
@@ -86,35 +88,54 @@ class LandingPage extends StatelessWidget {
 
                     const SizedBox(height: 28),
 
-                    // BUTTON ROW
+                    // ====== BUTTONS =======
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // LOGIN BUTTON
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 42, vertical: 14),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Text(
-                            "LogIn",
-                            style: TextStyle(
-                              color: Color(0xFF6A1B9A),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                        // LOGIN BUTTON → go to login.dart
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPage()),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 42, vertical: 14),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Text(
+                              "LogIn",
+                              style: TextStyle(
+                                color: Color(0xFF6A1B9A),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ),
 
-                        // SIGN UP BUTTON
-                        const Text(
-                          "SignUp",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
+                        // SIGNUP BUTTON → go to register.dart
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const RegisterPage()),
+                            );
+                          },
+                          child: const Text(
+                            "SignUp",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -131,7 +152,7 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  // Dot widget
+  // Dot indicator widget
   Widget _dot(bool active) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
