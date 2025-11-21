@@ -1,148 +1,145 @@
 import 'package:flutter/material.dart';
 
-class MedLineOnboarding extends StatelessWidget {
-  const MedLineOnboarding({super.key});
+class LandingPage extends StatelessWidget {
+  const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
+      body: Stack(
         children: [
-          const SizedBox(height: 60),
-
-          // ======= IMAGE SECTION =======
-          Image.asset(
-            "assets/images/medline.png",
-            width: 260,
-          ),
-
-          const SizedBox(height: 20),
-
-          // Dot indicator
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _dot(isActive: true),
-              _dot(),
-              _dot(),
-            ],
-          ),
-
-          const SizedBox(height: 30),
-
-          // ======= PURPLE CURVED CONTAINER =======
-          Expanded(
+          // ===== PURPLE BACKGROUND CURVE =====
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
             child: Container(
-              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.45,
               decoration: const BoxDecoration(
-                color: Color(0xFFB388FF),
+                color: Color(0xFFC7A4FF), // Ungu pastel sesuai desain
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
+                  topLeft: Radius.circular(55),
+                  topRight: Radius.circular(55),
                 ),
               ),
-              padding: const EdgeInsets.all(25),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+          ),
+
+          // ===== MAIN CONTENT =====
+          Column(
+            children: [
+              const SizedBox(height: 70),
+
+              // IMAGE ON TOP
+              Center(
+                child: Image.asset(
+                  "assets/images/medline.png",
+                  width: 300,
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+              // DOT INDICATOR
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "MedLine",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  const Text(
-                    "Aplikasi ini memungkinkan pengguna "
-                    "memantau antrian secara real-time dengan "
-                    "tampilan yang informatif dan mudah dipahami, "
-                    "membantu memperkirakan waktu tunggu dan "
-                    "mengurangi ketidakpastian saat menunggu "
-                    "giliran pelayanan.",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      height: 1.4,
-                    ),
-                  ),
-
-                  const Spacer(),
-
-                  // === BUTTONS ===
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _roundedButton(
-                        text: "LogIn",
-                        onTap: () {},
-                      ),
-                      _textButton(
-                        text: "SignUp",
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 20),
+                  _dot(true),
+                  _dot(false),
+                  _dot(false),
                 ],
               ),
-            ),
-          )
+
+              const Spacer(),
+
+              // PURPLE INFO SECTION
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "MedLine",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    const Text(
+                      "Aplikasi ini memungkinkan pengguna "
+                      "memantau antrian secara real-time dengan "
+                      "tampilan yang informatif dan mudah dipahami, "
+                      "membantu memperkirakan waktu tunggu dan "
+                      "mengurangi ketidakpastian saat menunggu "
+                      "giliran pelayanan.",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                    ),
+
+                    const SizedBox(height: 28),
+
+                    // BUTTON ROW
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // LOGIN BUTTON
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 42, vertical: 14),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Text(
+                            "LogIn",
+                            style: TextStyle(
+                              color: Color(0xFF6A1B9A),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+
+                        // SIGN UP BUTTON
+                        const Text(
+                          "SignUp",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 35),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 
   // Dot widget
-  Widget _dot({bool isActive = false}) {
+  Widget _dot(bool active) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
-      width: isActive ? 10 : 7,
-      height: isActive ? 10 : 7,
+      width: active ? 10 : 7,
+      height: active ? 10 : 7,
       decoration: BoxDecoration(
-        color: isActive ? Colors.deepPurple : Colors.grey[300],
         shape: BoxShape.circle,
-      ),
-    );
-  }
-
-  // Filled button
-  Widget _roundedButton({required String text, required Function onTap}) {
-    return InkWell(
-      onTap: () => onTap(),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: Colors.deepPurple,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Transparent text button
-  Widget _textButton({required String text, required Function onTap}) {
-    return InkWell(
-      onTap: () => onTap(),
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+        color: active ? Colors.deepPurple : Colors.grey[400],
       ),
     );
   }
