@@ -36,7 +36,7 @@ class LandingPage extends StatelessWidget {
               // IMAGE
               Center(
                 child: Image.asset(
-                  "assets/images/medline.png",
+                  "assets/images/landing_page.png",
                   width: 300,
                 ),
               ),
